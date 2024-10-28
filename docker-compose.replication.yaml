@@ -1,0 +1,43 @@
+# .ddev/multi-compose-databases/docker-compose-replication.yaml
+version: '3.6'
+services:
+  db:
+    ports: []
+    networks:
+      - ddev_default
+    volumes:
+      - "./master.cnf:/etc/mysql/conf.d/my.cnf"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: replica_user
+      MYSQL_PASSWORD: replication_password
+  replica_1:
+    image: "mysql:8.0"
+    container_name: "ddev-${DDEV_SITENAME}-replica-1"
+    depends_on:
+      - db
+      - proxy-sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: replica_user
+      MYSQL_PASSWORD: replication_password
+    networks:
+      - ddev_default
+    volumes:
+      - "./replica.cnf:/etc/mysql/conf.d/my.cnf"
+      - "./replica.sql:/docker-entrypoint-initdb.d/1-replica.sql"
+  replica_2:
+    image: "mysql:8.0"
+    container_name: "ddev-${DDEV_SITENAME}-replica-2"
+    depends_on:
+      - db
+      - proxy-sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: replica_user
+      MYSQL_PASSWORD: replication_password
+    networks:
+      - ddev_default
