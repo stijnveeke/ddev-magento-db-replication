@@ -154,8 +154,8 @@ dependencies:
 post_install_actions:
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/master/*.sh
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/replica/*.sh
-    - ./setup_files/replica/setup_replication.sh replica_1
-    - ./setup_files/replica/setup_replication.sh replica_2
+    - ./setup_files/replica/setup_replication.sh replica_1 replication_user replication_password
+    - ./setup_files/replica/setup_replication.sh replica_2 replication_user replication_password
   # - chmod +x ~/.ddev/commands/web/somecommand
   # - touch ${DDEV_APPROOT}/somefile.${GOOS}.${DDEV_WEBSERVER}
   # - perl -pi -e 's/oldstring/newstring/g' ${DDEV_APPROOT}/.ddev/docker-compose.addon-template.yaml
