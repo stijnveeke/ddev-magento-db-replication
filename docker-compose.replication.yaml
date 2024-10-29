@@ -1,6 +1,7 @@
 #ddev-generated
 services:
   db:
+    image: "mysql:8.0"
     ports: []
     networks:
       - ddev_default
