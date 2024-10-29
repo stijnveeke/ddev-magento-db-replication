@@ -154,7 +154,7 @@ dependencies:
 post_install_actions:
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/master/*.sh
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/replica/*.sh
-    - chmod +x ./mysql_replication/setup_replication.sh
+    - chmod +x ~/.ddev/mysql_replication/setup_replication.sh
     - ./mysql_replication/setup_replication.sh replica_1 replication_user replication_password
     - ./mysql_replication/setup_replication.sh replica_2 replication_user replication_password
   # - chmod +x ~/.ddev/commands/web/somecommand

@@ -2,19 +2,19 @@
 #ddev-generated
 
 # Check if enough arguments are passed
-if [ "$#" -lt 1 ]; then
-    echo "Usage: $0 <slave_host> [slave_user] [slave_password]"
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 <master_host> <slave_host> [master_user] [master_password] [slave_user] [slave_password]"
     exit 1
 fi
 
 #Master slave information details
-MASTER_HOST="${DDEV_DB_HOST}"
-MASTER_USER="${DDEV_DB_USER}"
-MASTER_PASSWORD="${DDEV_DB_PASS}"
+MASTER_HOST="$1"
+MASTER_USER="${3:-root}"
+MASTER_PASSWORD="${4:-root}"
 
-SLAVE_HOST="$1"
-SLAVE_USER="${2:-root}"
-SLAVE_PASSWORD="${3:-root}"
+SLAVE_HOST="$2"
+SLAVE_USER="${5:-root}"
+SLAVE_PASSWORD="${6:-root}"
 
 echo "MASTER HOST: $MASTER_HOST"
 echo "SLAVE HOST: $SLAVE_HOST"
