@@ -19,6 +19,7 @@ services:
       MYSQL_DATABASE: db
       MYSQL_USER: replication_user
       MYSQL_PASSWORD: replication_password
+      USER: stijn
     networks:
       - ddev_default
     volumes:
@@ -27,7 +28,6 @@ services:
   replica_2:
     image: mysql:8.0
     container_name: "ddev-${DDEV_SITENAME}-replica-2"
-    user: "mysql:mysql"
     depends_on:
       - db
     command: --server-id=3 --log-bin=mysql-bin --binlog-format=row
@@ -36,5 +36,6 @@ services:
       MYSQL_DATABASE: db
       MYSQL_USER: replication_user
       MYSQL_PASSWORD: replication_password
+      USER: stijn
     networks:
       - ddev_default
