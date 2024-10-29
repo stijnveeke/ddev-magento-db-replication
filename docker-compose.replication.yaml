@@ -21,7 +21,7 @@ services:
     networks:
       - ddev_default
     volumes:
-      - "./mysql_replication/alter_replica_user.sql:/docker-entrypoint-initdb.d/1-alter_replica_user.sql"
+      - "./mysql_replication/alter_user_for_replica.sql:/docker-entrypoint-initdb.d/1-alter_user_for_replica.sql"
       - "./mysql_replication/setup_replication.sh:/docker-entrypoint-initdb.d/2-setup_replication.sh"
   replica_2:
     image: "mysql:8.0"
