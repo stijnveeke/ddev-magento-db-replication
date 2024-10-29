@@ -1,5 +1,4 @@
-# .ddev/multi-compose-databases/docker-compose-replication.yaml
-version: '3.6'
+#ddev-generated
 services:
   db:
     ports: []
