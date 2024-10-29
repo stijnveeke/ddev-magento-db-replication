@@ -27,6 +27,7 @@ services:
   replica_2:
     image: mysql:8.0
     container_name: "ddev-${DDEV_SITENAME}-replica-2"
+    user: "mysql:mysql"
     depends_on:
       - db
     command: --server-id=3 --log-bin=mysql-bin --binlog-format=row
