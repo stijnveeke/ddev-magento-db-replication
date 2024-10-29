@@ -1,7 +1,7 @@
 #ddev-generated
 services:
   db:
-    image: "mysql:8.0"
+    image: mysql:8.0
     ports: []
     networks:
       - ddev_default
@@ -9,7 +9,7 @@ services:
       - "./master.cnf:/etc/mysql/conf.d/my.cnf"
     command: --server-id=1 --log-bin=mysql-bin --binlog-format=row
   replica_1:
-    image: "mysql:8.0"
+    image: mysql:8.0
     container_name: "ddev-${DDEV_SITENAME}-replica-1"
     depends_on:
       - db
@@ -25,7 +25,7 @@ services:
       - "./mysql_replication/alter_user_for_replica.sql:/docker-entrypoint-initdb.d/1-alter_user_for_replica.sql"
       - "./mysql_replication/setup_replication.sh:/docker-entrypoint-initdb.d/2-setup_replication.sh"
   replica_2:
-    image: "mysql:8.0"
+    image: mysql:8.0
     container_name: "ddev-${DDEV_SITENAME}-replica-2"
     depends_on:
       - db
