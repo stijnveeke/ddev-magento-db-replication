@@ -7,11 +7,6 @@ services:
     volumes:
       - "./master.cnf:/etc/mysql/conf.d/my.cnf"
     command: --server-id=1 --log-bin=mysql-bin --binlog-format=row
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db
-      MYSQL_USER: replication_user
-      MYSQL_PASSWORD: replication_password
   replica_1:
     image: "mysql:8.0"
     container_name: "ddev-${DDEV_SITENAME}-replica-1"
