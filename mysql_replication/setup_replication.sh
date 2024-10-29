@@ -15,6 +15,8 @@ SLAVE_HOST="$1"
 SLAVE_USER="${2:-root}"
 SLAVE_PASSWORD="${3:-root}"
 
+echo "MASTER HOST: $MASTER_HOST"
+
 #Step 1: Get Master Status
 MASTER_STATUS=$(mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "SHOW MASTER STATUS\G")
 
