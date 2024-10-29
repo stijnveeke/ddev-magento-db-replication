@@ -1,23 +1,10 @@
 #!/bin/bash
 #ddev-generated
 
-# Check if enough arguments are passed
-if [ "$#" -lt 2 ]; then
-    echo "Usage: $0 <master_host> <slave_host> [master_user] [master_password] [slave_user] [slave_password]"
-    exit 1
-fi
-
 #Master slave information details
-MASTER_HOST="$1"
-MASTER_USER="${3:-root}"
-MASTER_PASSWORD="${4:-root}"
-
-SLAVE_HOST="$2"
-SLAVE_USER="${5:-root}"
-SLAVE_PASSWORD="${6:-root}"
-
-echo "MASTER HOST: $MASTER_HOST"
-echo "SLAVE HOST: $SLAVE_HOST"
+MASTER_HOST="db"
+MASTER_USER="db"
+MASTER_PASSWORD="db"
 
 #Step 1: Get Master Status
 MASTER_STATUS=$(mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "SHOW MASTER STATUS\G")
