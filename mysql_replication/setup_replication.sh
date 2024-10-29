@@ -3,8 +3,8 @@
 
 #Master slave information details
 MASTER_HOST="db"
-MASTER_USER="db"
-MASTER_PASSWORD="db"
+MASTER_USER="root"
+MASTER_PASSWORD="root"
 
 #Step 1: Get Master Status
 MASTER_STATUS=$(mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "SHOW MASTER STATUS\G")
