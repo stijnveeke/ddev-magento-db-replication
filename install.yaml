@@ -65,7 +65,7 @@ pre_install_actions:
       
         EOF
     - |
-        cat <<'EOF; >${DDEV_APPROOT}/.ddev/db-build/Dockerfile.mysql-replication
+        cat <<'EOF' >${DDEV_APPROOT}/.ddev/db-build/Dockerfile.mysql-replication
         #ddev-generated
         # Modify the last line of docker-entrypoint.sh - needed unless issue #6668 is accepted and implemented in ddev...
         RUN sed -i '$d' /docker-entrypoint.sh
