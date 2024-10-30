@@ -64,6 +64,28 @@ pre_install_actions:
         )
       
         EOF
+        - |
+        cat <<EOF >${DDEV_APPROOT}/.ddev/db-build/Dockerfile.mysql-replication
+        #ddev-generated
+        # Modify the last line of docker-entrypoint.sh - needed unless issue #6668 is accepted and implemented in ddev...
+        # RUN sed -i '$d' /docker-entrypoint.sh
+        # RUN sed -i '$d' /docker-entrypoint.sh
+        # RUN echo '# Checks if any arguments are present.' >> /docker-entrypoint.sh && \
+        #     echo 'if [ "$#" -eq 0 ]; then' >> /docker-entrypoint.sh && \
+        #     echo '    tail -f /var/log/mysqld.log &' >> /docker-entrypoint.sh && \
+        #     echo '    exec mysqld --server-id=0' >> /docker-entrypoint.sh && \
+        #     echo 'else' >> /docker-entrypoint.sh && \
+        #     echo '    # Checks if --server-id argument is given.' >> /docker-entrypoint.sh && \
+        #     echo '    if [[ " $* " =~ "--server-id"([=[:space:]]|$) ]]; then' >> /docker-entrypoint.sh && \
+        #     echo '        tail -f /var/log/mysqld.log &' >> /docker-entrypoint.sh && \
+        #     echo '        exec mysqld "$@"' >> /docker-entrypoint.sh && \
+        #     echo '    else' >> /docker-entrypoint.sh && \
+        #     echo '        tail -f /var/log/mysqld.log &' >> /docker-entrypoint.sh && \
+        #     echo '        exec mysqld --server-id=0 "$@"' >> /docker-entrypoint.sh && \
+        #     echo '    fi' >> /docker-entrypoint.sh && \
+        #     echo 'fi' >> /docker-entrypoint.sh
+        COPY ./custom-entrypoint.sh /docker-entrypoint.sh
+        EOF
   # - |
   #   #ddev-description:Check architecture type for incompatible arm64 type
   #   if [ "$(uname -m)" = "arm64" -o "$(uname -m)" = "aarch64" ]; then
@@ -119,7 +141,7 @@ project_files:
   - docker-compose.replication.yaml
   - proxysql.cnf
   - mysql_replication
-  - docker-entrypoint.sh
+  - custom-entrypoint.sh
 #  - replica.cnf
 #  - master.cnf
   # - commands/web/add-on-command
@@ -153,6 +175,7 @@ dependencies:
 # DDEV environment variables can be interpolated into these actions.
 # post_install_actions are executed in the context of the target project's .ddev directory.
 post_install_actions:
+    - mysql -u root -proot -h db < ${DDEV_APPROOT}/.ddev/mysql_replication/create_replica_user_for_master.sql
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/master/*.sh
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/replica/*.sh
 #    - chmod +x ${DDEV_APPROOT}/.ddev/mysql_replication/setup_replication.sh

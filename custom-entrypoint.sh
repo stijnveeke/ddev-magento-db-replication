@@ -139,5 +139,18 @@ echo 'MySQL init process done. Ready for start up.'
 echo
 
 echo "Starting mysqld."
-tail -f /var/log/mysqld.log &
-exec mysqld --server-id=1 --log-bin=mysql-bin --binlog-format=row
+
+# Checks if any arguments are present.
+if [ "$#" -eq 0 ]; then
+  tail -f /var/log/mysqld.log &
+  exec mysqld --server-id=0
+else
+  # Checks if --server-id argument is given.
+  if [[ " $* " =~ "--server-id"([=[:space:]]|$) ]]; then
+    tail -f /var/log/mysqld.log &
+    exec mysqld "$@"
+  else
+    tail -f /var/log/mysqld.log &
+    exec mysqld --server-id=0 "$@"
+  fi
+fi

@@ -4,9 +4,6 @@ services:
     ports: []
     networks:
       - ddev_default
-    volumes:
-      - "./mysql_replication/master.cnf:/docker-entrypoint-initdb.d/my.cnf"
-      - "./mysql_replication/create_replica_user_for_master.sql:/docker-entrypoint-initdb.d/1-create_replica_user_for_master.sql"
     command: --server-id=1 --log-bin=mysql-bin --binlog-format=row
   replica_1:
     image: mysql:8.0
@@ -38,3 +35,6 @@ services:
       MYSQL_PASSWORD: replication_password
     networks:
       - ddev_default
+    volumes:
+      - "./mysql_replication/alter_user_for_replica.sql:/docker-entrypoint-initdb.d/1-alter_user_for_replica.sql"
+      - "./mysql_replication/setup_replication.sh:/docker-entrypoint-initdb.d/2-setup_replication.sh"
