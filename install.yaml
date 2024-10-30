@@ -175,7 +175,7 @@ dependencies:
 # DDEV environment variables can be interpolated into these actions.
 # post_install_actions are executed in the context of the target project's .ddev directory.
 post_install_actions:
-    - mysql -u root -proot -h db < ${DDEV_APPROOT}/.ddev/mysql_replication/create_replica_user_for_master.sql
+#    - mysql -u root -proot -h db < ${DDEV_APPROOT}/.ddev/mysql_replication/create_replica_user_for_master.sql
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/master/*.sh
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/replica/*.sh
 #    - chmod +x ${DDEV_APPROOT}/.ddev/mysql_replication/setup_replication.sh
