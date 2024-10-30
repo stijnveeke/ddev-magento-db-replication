@@ -5,7 +5,7 @@ services:
     networks:
       - ddev_default
     volumes:
-      - "./mysql_replication.sql:/docker-entrypoint-initdb.d/1-create_replica_user_for_master.sql"
+      - "./mysql_replication/create_replica_user_for_master.sql:/docker-entrypoint-initdb.d/1-create_replica_user_for_master.sql"
     command: --server-id=1 --log-bin=mysql-bin --binlog-format=row
   replica_1:
     image: mysql:8.0
