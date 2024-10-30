@@ -119,6 +119,7 @@ project_files:
   - docker-compose.replication.yaml
   - proxysql.cnf
   - mysql_replication
+  - docker-entrypoint.sh
 #  - replica.cnf
 #  - master.cnf
   # - commands/web/add-on-command
