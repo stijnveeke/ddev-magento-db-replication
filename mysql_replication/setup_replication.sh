@@ -6,6 +6,11 @@ MASTER_HOST="db"
 MASTER_USER="root"
 MASTER_PASSWORD="root"
 
+mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "
+  CREATE USER IF NOT EXISTS 'replication_user'@'%' IDENTIFIED BY 'replication_password';
+  GRANT REPLICATION SLAVE ON *.* TO 'replication_user'@'%';
+  FLUSH PRIVILEGES;
+"
 #Step 1: Get Master Status
 MASTER_STATUS=$(mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "SHOW MASTER STATUS\G")
 
