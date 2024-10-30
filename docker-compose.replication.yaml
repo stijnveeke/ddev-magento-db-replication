@@ -6,6 +6,7 @@ services:
       - ddev_default
     volumes:
       - "./mysql_replication/master.cnf:/docker-entrypoint-initdb.d/my.cnf"
+      - "./docker-entrypoint.sh:/docker-entrypoint.sh"
       - "./mysql_replication/create_replica_user_for_master.sql:/docker-entrypoint-initdb.d/1-create_replica_user_for_master.sql"
     command: --server-id=1 --log-bin=mysql-bin --binlog-format=row
   replica_1:
