@@ -68,7 +68,7 @@ pre_install_actions:
         cat <<EOF >${DDEV_APPROOT}/.ddev/db-build/Dockerfile.mysql-replication
         #ddev-generated
         # Modify the last line of docker-entrypoint.sh - needed unless issue #6668 is accepted and implemented in ddev...
-        RUN sed -i '$d' /docker-entrypoint.sh
+        RUN sed -i '$s' /docker-entrypoint.sh
         RUN sed -i '$d' /docker-entrypoint.sh
         RUN echo '# Checks if any arguments are present.' >> /docker-entrypoint.sh && \
             echo 'if [ "$#" -eq 0 ]; then' >> /docker-entrypoint.sh && \
