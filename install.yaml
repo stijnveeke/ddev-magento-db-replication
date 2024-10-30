@@ -66,24 +66,6 @@ pre_install_actions:
         EOF
         - |
         cat <<EOF >${DDEV_APPROOT}/.ddev/db-build/Dockerfile.mysql-replication
-        #ddev-generated
-        # Modify the last line of docker-entrypoint.sh - needed unless issue #6668 is accepted and implemented in ddev...
-        # RUN sed -i '$d' /docker-entrypoint.sh
-        # RUN sed -i '$d' /docker-entrypoint.sh
-        # RUN echo '# Checks if any arguments are present.' >> /docker-entrypoint.sh && \
-        #     echo 'if [ "$#" -eq 0 ]; then' >> /docker-entrypoint.sh && \
-        #     echo '    tail -f /var/log/mysqld.log &' >> /docker-entrypoint.sh && \
-        #     echo '    exec mysqld --server-id=0' >> /docker-entrypoint.sh && \
-        #     echo 'else' >> /docker-entrypoint.sh && \
-        #     echo '    # Checks if --server-id argument is given.' >> /docker-entrypoint.sh && \
-        #     echo '    if [[ " $* " =~ "--server-id"([=[:space:]]|$) ]]; then' >> /docker-entrypoint.sh && \
-        #     echo '        tail -f /var/log/mysqld.log &' >> /docker-entrypoint.sh && \
-        #     echo '        exec mysqld "$@"' >> /docker-entrypoint.sh && \
-        #     echo '    else' >> /docker-entrypoint.sh && \
-        #     echo '        tail -f /var/log/mysqld.log &' >> /docker-entrypoint.sh && \
-        #     echo '        exec mysqld --server-id=0 "$@"' >> /docker-entrypoint.sh && \
-        #     echo '    fi' >> /docker-entrypoint.sh && \
-        #     echo 'fi' >> /docker-entrypoint.sh
         COPY ./custom-entrypoint.sh /docker-entrypoint.sh
         EOF
   # - |
