@@ -175,8 +175,10 @@ dependencies:
 # DDEV environment variables can be interpolated into these actions.
 # post_install_actions are executed in the context of the target project's .ddev directory.
 post_install_actions:
-    - docker exec -it ddev-${DDEV_SITENAME}-db mysql -u root -proot -h db < ${DDEV_APPROOT}/.ddev/mysql_replication/create_replica_user_for_master.sql
-#    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/master/*.sh
+    - docker exec -it ddev-${DDEV_SITENAME}-db mysql -u root -proot -e "CREATE USER 'monitor'@'%' IDENTIFIED BY 'monitor';"
+#    - docker exec -it ddev-${DDEV_SITENAME}-db mysql -u root -proot < ${DDEV_APPROOT}/.ddev/mysql_replication/create_replica_user_for_master.sql
+
+    #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/master/*.sh
 #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/replica/*.sh
 #    - chmod +x ${DDEV_APPROOT}/.ddev/mysql_replication/setup_replication.sh
 #    - ./mysql_replication/setup_replication.sh db replica_1 db db replication_user replication_password
