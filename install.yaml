@@ -64,7 +64,7 @@ pre_install_actions:
         )
       
         EOF
-        - |
+    - |
         cat <<EOF >${DDEV_APPROOT}/.ddev/db-build/Dockerfile.mysql-replication
         COPY ./custom-entrypoint.sh /docker-entrypoint.sh
         EOF
