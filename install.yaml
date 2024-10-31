@@ -176,7 +176,7 @@ dependencies:
 # post_install_actions are executed in the context of the target project's .ddev directory.
 post_install_actions:
     - docker exec -it ddev-${DDEV_SITENAME}-db mysql -u root -proot -e "CREATE USER IF NOT EXISTS 'monitor'@'%' IDENTIFIED BY 'monitor';"
-    - docker exec -it ddev-${DDEV_SITENAME}-db mysqldump -u root -proot db --source-data > ${DDEV_APPROOT}/.ddev/mysql_replication/master-db.sql
+#    - docker exec -it ddev-${DDEV_SITENAME}-db mysqldump -u root -proot db > ${DDEV_APPROOT}/.ddev/mysql_replication/master-db.sql
 #    - docker exec -it ddev-${DDEV_SITENAME}-db mysql -u root -proot < ${DDEV_APPROOT}/.ddev/mysql_replication/create_replica_user_for_master.sql
 
     #    - chmod +x ${DDEV_APPROOT}/.ddev/setup_files/master/*.sh

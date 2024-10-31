@@ -6,7 +6,7 @@ services:
       - ddev_default
     command: --server-id=1 --log-bin=mysql-bin --binlog-format=row
   replica_1:
-    image: mysql:8.0
+    image: "${DDEV_DATABASE}"
     container_name: "ddev-${DDEV_SITENAME}-replica-1"
     depends_on:
       - db
@@ -24,7 +24,7 @@ services:
       - "./mysql_replication/alter_user_for_replica.sql:/docker-entrypoint-initdb.d/2-alter_user_for_replica.sql"
       - "./mysql_replication/setup_replication.sh:/docker-entrypoint-initdb.d/3-setup_replication.sh"
   replica_2:
-    image: mysql:8.0
+    image: "${DDEV_DATABASE}"
     container_name: "ddev-${DDEV_SITENAME}-replica-2"
     depends_on:
       - db

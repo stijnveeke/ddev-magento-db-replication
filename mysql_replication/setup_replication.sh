@@ -11,6 +11,11 @@ mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "
   GRANT REPLICATION SLAVE ON *.* TO 'replication_user'@'%';
   FLUSH PRIVILEGES;
 "
+
+#Attempting to automate db dump process for replica.
+DATABASE_DUMP=$(mysqldump -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD db)
+mysql -u root -proot < $DATABASE_DUMP
+
 #Step 1: Get Master Status
 MASTER_STATUS=$(mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "SHOW MASTER STATUS\G")
 
