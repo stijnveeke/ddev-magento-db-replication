@@ -16,7 +16,7 @@ echo "Dumping database from master..."
 mysqldump -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD db > /tmp/db.sql
 
 echo "Importing database dump..."
-mysql -u root -proot < /tmp/db.sql
+mysql -u root -proot db < /tmp/db.sql
 
 echo "Cleaning up..."
 rm -f /tmp/db.sql
