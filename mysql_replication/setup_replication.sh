@@ -6,6 +6,7 @@ MASTER_HOST="db"
 MASTER_USER="root"
 MASTER_PASSWORD="root"
 
+echo "Creating replication user for db..."
 mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "
   CREATE USER IF NOT EXISTS 'replication_user'@'%' IDENTIFIED BY 'replication_password';
   GRANT REPLICATION SLAVE ON *.* TO 'replication_user'@'%';
@@ -22,6 +23,7 @@ echo "Cleaning up..."
 rm -f /tmp/db.sql
 
 #Step 1: Get Master Status
+echo "Getting master status..."
 MASTER_STATUS=$(mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "SHOW MASTER STATUS\G")
 
 #Step 2: Get Master Log File and Position
@@ -32,6 +34,7 @@ echo "Master Log File: $MASTER_LOG_FILE"
 echo "Master Log Position: $MASTER_LOG_POS"
 
 #Step 3: Configure and Start Slave
+echo "Configuring and starting slave..."
 mysql -u root -proot -e "
   STOP SLAVE;
   CHANGE MASTER TO
@@ -44,5 +47,6 @@ mysql -u root -proot -e "
 "
 
 #Step 4: Check Slave Status
+echo "Checking slave status..."
 SLAVE_STATUS=$(mysql -u root -proot -e "SHOW SLAVE STATUS\G")
 echo "$SLAVE_STATUS"

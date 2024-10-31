@@ -137,11 +137,8 @@ pre_install_actions:
 # If you use directories, they must be directories that are managed
 # by this add-on, or removal could remove things that are not owned by it
 project_files:
-  - docker-compose.proxysql.yaml
   - docker-compose.replication.yaml
-  - proxysql.cnf
   - mysql_replication
-  - custom-entrypoint.sh
 #  - replica.cnf
 #  - master.cnf
   # - commands/web/add-on-command
