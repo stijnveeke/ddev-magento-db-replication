@@ -12,9 +12,14 @@ mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "
   FLUSH PRIVILEGES;
 "
 
-#Attempting to automate db dump process for replica.
-DATABASE_DUMP=$(mysqldump -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD db)
-mysql -u root -proot < $DATABASE_DUMP
+echo "Dumping database from master..."
+mysqldump -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD db > /tmp/db.sql
+
+echo "Importing database dump..."
+mysql -u root -proot < /tmp/db.sql
+
+echo "Cleaning up..."
+rm -f /tmp/db.sql
 
 #Step 1: Get Master Status
 MASTER_STATUS=$(mysql -h $MASTER_HOST -u $MASTER_USER -p$MASTER_PASSWORD -e "SHOW MASTER STATUS\G")
