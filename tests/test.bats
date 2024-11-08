@@ -134,7 +134,7 @@ drop_table() {
 # Check if replicas are setup
 check_if_replicas_are_setup() {
   for container in "$@"; do
-    run docker exec -it "${container}" mysql -uroot -proot -e "SHOW SLAVE STATUS\G"
+    run docker exec "${container}" mysql -uroot -proot -e "SHOW SLAVE STATUS\G"
     echo "status: $output"
     
     if echo "$output" | grep -q "Slave_IO_Running: Yes"; then
