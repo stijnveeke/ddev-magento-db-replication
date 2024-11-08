@@ -170,7 +170,7 @@ teardown() {
 @test "install from directory" {
   set -eu -o pipefail
   cd ${TESTDIR}
-  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
   ddev restart
 
@@ -181,9 +181,9 @@ teardown() {
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev add-on get ddev/ddev-magento2-db-replication with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  echo "# ddev get stijnveeke/ddev-magento2-db-replication with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   # ddev get ddev/ddev-magento-proxysql
-  ddev get ddev/ddev-magento2-db-replication
+  ddev get stijnveeke/ddev-magento2-db-replication
   ddev restart >/dev/null
   health_checks
 }
