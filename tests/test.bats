@@ -178,13 +178,13 @@ teardown() {
   health_checks "${containers[@]}"
 }
 
-# bats test_tags=release
-# @test "install from release" {
-#   set -eu -o pipefail
-#   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-#   echo "# ddev add-on get ddev/ddev-magento-proxysql with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-#   # ddev get ddev/ddev-magento-proxysql
-#   ddev get ddev/ddev-magento2-db-replication
-#   ddev restart >/dev/null
-#   health_checks
-# }
+bats test_tags=release
+@test "install from release" {
+  set -eu -o pipefail
+  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
+  echo "# ddev add-on get ddev/ddev-magento2-db-replication with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  # ddev get ddev/ddev-magento-proxysql
+  ddev get ddev/ddev-magento2-db-replication
+  ddev restart >/dev/null
+  health_checks
+}
